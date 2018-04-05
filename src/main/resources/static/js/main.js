@@ -35,6 +35,7 @@ function connect(event) {
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe('topic/public', onClickedReceived);
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
@@ -65,6 +66,7 @@ function sendMessage(event) {
     }
     event.preventDefault();
 }
+
 
 
 function onMessageReceived(payload) {
@@ -114,5 +116,9 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+
+
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
+
+
